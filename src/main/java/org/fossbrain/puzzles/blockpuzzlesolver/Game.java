@@ -36,8 +36,30 @@ public class Game {
         calculatePossibleBlockStartPositions();
         sortBlocksAccordingToTheirPossibleStartPositions();
         initializeBoard();
-        System.out.println(printBoard());
+        if (!solve(0)) {
+            throw new IllegalArgumentException("Puzzle is not solvable");
+        }
         return this;
+    }
+
+    private boolean solve(int dept) {
+        Block currentBlock = blocks.get(dept);
+        List<Position> startPositions = currentBlock.getStartPositions();
+        for (Position position : startPositions) {
+            if (position.apply(board)) {
+                if (dept == blocks.size() - 1) {
+                    return true;
+                }
+                if (solve(dept + 1)) {
+                    return true;
+                } else {
+                    position.revert(board);
+                }
+            } else {
+                position.revert(board);
+            }
+        }
+        return false;
     }
 
     private void initializeBoard() {

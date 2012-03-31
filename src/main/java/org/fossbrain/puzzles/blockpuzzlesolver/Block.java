@@ -21,12 +21,24 @@ public class Block implements Comparable<Block> {
         return possibleStartLocations.size();
     }
 
+    public List<Position> getStartPositions() {
+        return possibleStartLocations;
+    }
+
+    public char getRepresentation() {
+        return representation;
+    }
+
+    public boolean[][] getLayout() {
+        return layout;
+    }
+
     public void calculatePossiblePositions(int lenght, int height) {
         calculateHeighestPossibilities(height);
         calculateLenghtPossibilities(lenght);
         for (int x = 0; x < lenghtPossibilities; x++) {
             for (int y = 0; y < heightPossibilities; y++) {
-                possibleStartLocations.add(new Position(x, y));
+                possibleStartLocations.add(new Position(x, y, this));
             }
         }
     }
@@ -36,18 +48,7 @@ public class Block implements Comparable<Block> {
     }
 
     private void calculateLenghtPossibilities(int lenght) {
-        int heighest = calculateHeighestElement();
-        lenghtPossibilities = lenght + 1 - heighest;
-    }
-
-    private int calculateHeighestElement() {
-        int heighest = 0;
-        for (boolean[] position : layout) {
-            if (position.length > heighest) {
-                heighest = position.length;
-            }
-        }
-        return heighest;
+        lenghtPossibilities = lenght + 1 - layout[0].length;
     }
 
     public int compareTo(Block o) {
