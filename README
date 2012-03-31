@@ -1,1 +1,4 @@
-A simple algorithm solving Puzzles from the "Block Puzzle 2" Application on the Android market by MTOY. 
+A simple algorithm solving Puzzles from the "Block Puzzle 2" Application on the Android market by MTOY.
+
+Right now there is no UI available. Simple checkout the code, create a new unit test and run :-)
+
