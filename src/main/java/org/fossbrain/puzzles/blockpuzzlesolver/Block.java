@@ -3,7 +3,7 @@ package org.fossbrain.puzzles.blockpuzzlesolver;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Block {
+public class Block implements Comparable<Block> {
 
     private char representation;
     private boolean[][] layout;
@@ -49,4 +49,9 @@ public class Block {
         }
         return heighest;
     }
+
+    public int compareTo(Block o) {
+        return getPossibleStartLocations() - o.getPossibleStartLocations();
+    }
+
 }

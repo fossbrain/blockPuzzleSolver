@@ -1,6 +1,7 @@
 package org.fossbrain.puzzles.blockpuzzlesolver;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -32,12 +33,17 @@ public class Game {
 
     public Game solve() {
         calculatePossibleBlockStartPositions();
+        sortBlocksAccordingToTheirPossibleStartPositions();
         return this;
+    }
+
+    private void sortBlocksAccordingToTheirPossibleStartPositions() {
+        Collections.sort(blocks);
     }
 
     private void calculatePossibleBlockStartPositions() {
         for (Block block : blocks) {
-            block.calculatePossiblePositions(lenght,height);
+            block.calculatePossiblePositions(lenght, height);
         }
     }
 
