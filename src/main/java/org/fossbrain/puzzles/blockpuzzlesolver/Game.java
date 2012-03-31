@@ -12,6 +12,7 @@ public class Game {
     private int lenght;
     private int height;
     private List<Block> blocks = new ArrayList<Block>();
+    private char[][] board;
 
     public Game() {
     }
@@ -34,7 +35,18 @@ public class Game {
     public Game solve() {
         calculatePossibleBlockStartPositions();
         sortBlocksAccordingToTheirPossibleStartPositions();
+        initializeBoard();
+        System.out.println(printBoard());
         return this;
+    }
+
+    private void initializeBoard() {
+        board = new char[height][lenght];
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < lenght; x++) {
+                board[y][x] = '0';
+            }
+        }
     }
 
     private void sortBlocksAccordingToTheirPossibleStartPositions() {
@@ -48,7 +60,14 @@ public class Game {
     }
 
     public String printBoard() {
-        return "";
+        StringBuilder currentSate = new StringBuilder();
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < lenght; x++) {
+                currentSate.append(board[y][x]).append(" ");
+            }
+            currentSate.append("\n");
+        }
+        return currentSate.toString();
     }
 
 }
